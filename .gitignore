@@ -1,0 +1,21 @@
+# Editor/IDE-Dateien
+*.swp
+*.bak
+*~
+.vscode/
+.idea/
+
+# Build-Zeugs
+*.tar
+*.img
+*.log
+
+# Docker-Reste
+webmin-current.deb
+docker-compose.override.yml
+
+# Volumes & temporäres
+volumes/
+data/
+tmp/
+

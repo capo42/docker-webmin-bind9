@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  webmin:
+    image: capo42/webmin-bind9:1.0
+    container_name: webmin
+    ports:
+      - "10000:10000"
+    volumes:
+      - webmin_config:/etc/webmin
+      - webmin_logs:/var/webmin
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Zurich
+    networks:
+      - sofahaus
+
+volumes:
+  webmin_config:
+  webmin_logs:
+
+networks:
+  sofahaus:
+    name: webmin-net
+    driver: bridge
