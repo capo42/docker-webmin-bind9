@@ -1,25 +1,20 @@
 version: '3.8'
 
 services:
-  webmin:
+  webmin-bind9:
     image: capo42/webmin-bind9:1.0
-    container_name: webmin
+    container_name: webmin-bind9
     ports:
-      - "10000:10000"
+      - "10000:10000"    # Webmin UI
+      - "53:53"          # DNS (TCP)
+      - "53:53/udp"      # DNS (UDP)
     volumes:
-      - webmin_config:/etc/webmin
-      - webmin_logs:/var/webmin
+      - webmin_data:/etc/webmin
+      - bind_data:/etc/bind
     restart: unless-stopped
     environment:
       - TZ=Europe/Zurich
-    networks:
-      - sofahaus
 
 volumes:
-  webmin_config:
-  webmin_logs:
-
-networks:
-  sofahaus:
-    name: webmin-net
-    driver: bridge
+  webmin_data:
+  bind_data:

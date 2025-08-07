@@ -19,11 +19,15 @@ services:
     image: capo42/webmin-bind9:1.0
     container_name: webmin-bind9
     ports:
-      - "10000:10000"   # Webmin UI
+      - "10000:10000"    # Webmin UI
+      - "53:53"          # DNS (TCP)
+      - "53:53/udp"      # DNS (UDP)
     volumes:
       - webmin_data:/etc/webmin
       - bind_data:/etc/bind
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Zurich
 
 volumes:
   webmin_data:
